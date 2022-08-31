@@ -19,11 +19,17 @@
                     <h4 class="mb-2">Bienvenido a AdminHair! 👋</h4>
                     <p class="mb-4">Introduce tus credenciales para iniciar sesión.</p>
 
-                    <form id="formAuthentication" class="mb-3" action="index.html" method="POST">
+                    <form id="formAuthentication" class="mb-3" [formGroup]="loginForm" (ngSubmit)="login()">
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
                             <input type="text" class="form-control" id="email" name="email-username"
-                                placeholder="Introduce tu email" autofocus />
+                                placeholder="Introduce tu email" autofocus required formControlName="email"
+                                [ngClass]="{'is-invalid' : notValidField('email') && this.formSubmitted, 'is-valid': !notValidField('email') && this.formSubmitted}" />
+                            <div class="row" *ngIf="notValidField('email')">
+                                <div class="col invalid-feedback">
+                                    <span>El email debe tener un formato válido.</span>
+                                </div>
+                            </div>
                         </div>
                         <div class="mb-3 form-password-toggle">
                             <div class="d-flex justify-content-between">
@@ -34,17 +40,24 @@
                             </div>
                             <div class="input-group input-group-merge">
                                 <input [type]="viewPass ? 'text':'password'" id="password" class="form-control"
-                                    name="password"
+                                    name="password" required formControlName="password"
+                                    [ngClass]="{'is-invalid' : notValidField('password') && this.formSubmitted, 'is-valid': !notValidField('password') && this.formSubmitted}"
                                     placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
                                     aria-describedby="password" />
                                 <span class="input-group-text cursor-pointer" (click)="viewPassword()">
                                     <i [ngClass]="{'bx-hide' : viewPass, 'bx-show': !viewPass}" class="bx"></i>
                                 </span>
                             </div>
+                            <div class="row" *ngIf="notValidField('password')">
+                                <div class="col invalid-feedback">
+                                    <span>Debe introducir una contraseña.</span>
+                                </div>
+                            </div>
                         </div>
                         <div class="mb-3">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="remember-me" />
+                                <input class="form-check-input" type="checkbox" id="remember-me"
+                                    formControlName="remember" />
                                 <label class="form-check-label" for="remember-me"> Recuérdame </label>
                             </div>
                         </div>
@@ -52,6 +65,11 @@
                             <button class="btn btn-primary d-grid w-100" type="submit">Iniciar sesión</button>
                         </div>
                     </form>
+                    <div class="row mb-3">
+                        <div class="col-xs-12 col-sm-12 col-md-12 m-t-10 text-center login-google">
+                            <div #googleBtn id="buttonDiv"></div>
+                        </div>
+                    </div>
 
                     <p class="text-center">
                         <span>¿Nuevo en nuestra plataforma? </span>

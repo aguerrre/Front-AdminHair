@@ -1,0 +1,33 @@
+<div class="container-xxl">
+    <div class="authentication-wrapper authentication-basic container-p-y">
+        <div class="authentication-inner">
+            <!-- Register Card -->
+            <div class="card">
+                <div class="card-body">
+                    <!-- Logo -->
+                    <div class="app-brand justify-content-center">
+                        <a href="index.html" class="app-brand-link gap-2">
+                            <span class="app-brand-logo demo">
+                                <img class="w100" src="../../../assets/img/icons/app-icon.png" />
+                            </span>
+                            <span class="app-brand-text demo text-body fw-bolder">adminhair</span>
+                        </a>
+                    </div>
+                    <!-- /Logo -->
+                    <h4 class="mb-4">Verificación de email</h4>
+                    <div class="alert alert-info" *ngIf="this.verified">
+                        <span>Tu cuenta ha sido verificada con éxito. Puedes iniciar sesión.</span>
+                    </div>
+                    <div class="alert alert-danger" *ngIf="!this.verified">
+                        <span>Ha ocurrido un error durante la verificación de la cuenta. Consulte con el administrador.</span>
+                    </div>
+                        <button class="btn btn-primary d-grid w-100" routerLink="/inicio-sesion" type="submit">
+                            Ir a Inicio de sesión
+                        </button>
+                </div>
+            </div>
+            <!-- Register Card -->
+        </div>
+    </div>
+</div>
+<!-- / Content -->

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,  } from '@angular/core';
 
 declare function customInitFunctions(): any;
 
@@ -8,10 +8,10 @@ declare function customInitFunctions(): any;
   styles: [
   ]
 })
-export class PagesComponent implements OnInit {
+export class PagesComponent implements OnInit{
 
   constructor() { }
-
+  
   ngOnInit(): void {
     customInitFunctions();
   }

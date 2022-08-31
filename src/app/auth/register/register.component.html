@@ -10,47 +10,78 @@
                             <span class="app-brand-logo demo">
                                 <img class="w100" src="../../../assets/img/icons/app-icon.png" />
                             </span>
-                            <span class="app-brand-text demo text-body fw-bolder">Sneat</span>
+                            <span class="app-brand-text demo text-body fw-bolder">adminhair</span>
                         </a>
                     </div>
                     <!-- /Logo -->
                     <h4 class="mb-2">Regístrate 🚀</h4>
                     <p class="mb-4">¡Organiza a tus clientes!</p>
 
-                    <form id="formAuthentication" class="mb-3" action="index.html" method="POST">
+                    <form id="formAuthentication" class="mb-3" [formGroup]="registerForm" (ngSubmit)="registerUser()">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="name" formControlName="name"
+                                placeholder="Tu nombre completo"
+                                [ngClass]="{'is-invalid' : notValidField('name') && this.formSubmitted, 'is-valid': !notValidField('name') && this.formSubmitted}" 
+                                required />
+                            <div class="row" *ngIf="notValidField('name')">
+                                <div class="col invalid-feedback">
+                                    <span>El nombre es obligatorio y debe tener 3 o más
+                                        caracteres.</span>
+                                </div>
+                            </div>
+                        </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
-                            <input type="text" class="form-control" id="email" name="email"
-                                placeholder="Tu email" autofocus/>
+                            <input type="text" class="form-control" id="email" formControlName="email"
+                                placeholder="Tu email"
+                                [ngClass]="{'is-invalid' : notValidField('email') && this.formSubmitted, 'is-valid': !notValidField('email') && this.formSubmitted}" 
+                                required />
+                            <div class="row" *ngIf="notValidField('email')">
+                                <div class="col invalid-feedback">
+                                    <span>El email debe tener un formato válido.</span>
+                                </div>
+                            </div>
                         </div>
                         <div class="mb-3 form-password-toggle">
                             <label class="form-label" for="password">Contraseña</label>
                             <div class="input-group input-group-merge">
-                                <input [type]="viewPass ? 'text':'password'" id="password" class="form-control" name="password"
+                                <input [type]="viewPass ? 'text':'password'" id="password" class="form-control"
+                                    formControlName="password"
+                                    [ngClass]="{'is-invalid' : notValidField('password') && this.formSubmitted, 'is-valid': !notValidField('password') && this.formSubmitted}"
                                     placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-                                    aria-describedby="password" />
+                                    aria-describedby="password" required />
                                 <span class="input-group-text cursor-pointer" (click)="viewPassword()">
                                     <i [ngClass]="{'bx-hide' : viewPass, 'bx-show': !viewPass}" class="bx"></i>
                                 </span>
                             </div>
+                            <div class="row" *ngIf="notValidField('password')">
+                                <div class="col invalid-feedback">
+                                    <span>La contraseña debe tener al menos 8 carácteres, una mayúscula, una minúscula y
+                                        un dígito.</span>
+                                </div>
+                            </div>
                         </div>
                         <div class="mb-3 form-password-toggle">
-                            <label class="form-label" for="password">Confirma contraseña</label>
+                            <label class="form-label" for="c_password">Confirma contraseña</label>
                             <div class="input-group input-group-merge">
-                                <input [type]="viewPassC ? 'text':'password'" id="password" class="form-control" name="password"
+                                <input [type]="viewPassC ? 'text':'password'" id="c_password" class="form-control"
+                                    formControlName="c_password"
+                                    [ngClass]="{'is-invalid' : notValidField('c_password') && this.formSubmitted, 'is-valid': !notValidField('c_password') && this.formSubmitted}"
                                     placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-                                    aria-describedby="password" />
+                                    aria-describedby="c_password" required />
                                 <span class="input-group-text cursor-pointer" (click)="viewPasswordC()">
                                     <i [ngClass]="{'bx-hide' : viewPassC, 'bx-show': !viewPassC}" class="bx"></i>
                                 </span>
                             </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="name" class="form-label">Nombre</label>
-                            <input type="text" class="form-control" id="name" name="name" placeholder="Tu nombre completo" />
+                            <div class="row" *ngIf="notValidField('c_password')">
+                                <div class="col invalid-feedback">
+                                    <span>Las contraseñas no coinciden.</span>
+                                </div>
+                            </div>
                         </div>
 
-<!--                         <div class="mb-3">
+                        <!--                         <div class="mb-3">
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" id="terms-conditions" name="terms" />
                                 <label class="form-check-label" for="terms-conditions">
@@ -59,7 +90,9 @@
                                 </label>
                             </div>
                         </div> -->
-                        <button class="btn btn-primary d-grid w-100">Sign up</button>
+                        <button class="btn btn-primary d-grid w-100" type="submit">
+                            Registrarse
+                        </button>
                     </form>
 
                     <p class="text-center">

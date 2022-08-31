@@ -1,1 +1,9 @@
 @import url('../../../assets/vendor/css/pages/page-auth.css');
+
+.login-google {
+  width: 100% !important;
+}
+.login-google > div {
+  margin: 0 auto !important;
+  display: inline-block !important;
+}
